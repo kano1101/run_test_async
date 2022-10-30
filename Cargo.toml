@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 futures = { version = "0.3.25", default-features = true }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }

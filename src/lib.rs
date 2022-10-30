@@ -17,3 +17,14 @@ where
         Ok(ok) => return ok,
     }
 }
+pub async fn bench<T>(
+    message: impl Into<&str> + Send,
+    target_fn: impl std::future::Future<Output = T> + Send,
+) -> T {
+    let now = std::time::Instant::now();
+    let r = target_fn.await;
+    let duration_time = format!("{:?}", now.elapsed());
+    let message = message.into();
+    tracing::info!(duration_time, message);
+    r
+}
